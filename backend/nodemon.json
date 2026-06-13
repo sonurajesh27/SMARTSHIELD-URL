@@ -1,0 +1,17 @@
+{
+  "watch": [
+    "config",
+    "controllers",
+    "middleware",
+    "models",
+    "routes",
+    "utils",
+    "server.js",
+    ".env"
+  ],
+  "ignore": [
+    "frontend/*",
+    "node_modules/*",
+    "tests/*"
+  ]
+}

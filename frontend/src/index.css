@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+
+  /* Cyber Neon Security Theme 2.0 Colors Override */
+  --color-slate-950: #05060A; /* Deep Space Black */
+  --color-slate-900: #070B14; /* Midnight Navy */
+  --color-slate-800: #0D1527;
+  --color-slate-850: #121C34;
+  --color-slate-750: #1B294A;
+  
+  --color-cyan-500: #00F5D4; /* Cyber Teal */
+  --color-cyan-400: #00E5FF; /* Neon Cyan Glow */
+  --color-cyan-600: #00E5FF;
+
+  --color-purple-500: #A855F7; /* Electric Purple */
+  --color-purple-600: #A855F7;
+  
+  --color-red-500: #FF3B5C; /* Warning Red */
+  --color-red-400: #FF3B5C;
+  
+  --color-emerald-500: #39FF88; /* Security Green */
+  --color-emerald-400: #39FF88;
+  
+  --color-indigo-500: #A855F7;
+  --color-indigo-400: #00E5FF;
+}
+
+/* Base Body Overrides for Cinematic Mode */
+body {
+  background-color: #05060A;
+  color: #f3f4f6;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(7, 11, 20, 0.85) 0%, #05060A 100%),
+    radial-gradient(circle at 15% 20%, rgba(0, 245, 212, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.04) 0%, transparent 45%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* CRT scanline glow noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.15) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+  opacity: 0.1;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.light body {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Glassmorphism 2.0 — Deep layers, strong highlights, glowing borders */
+.glass-card {
+  background: rgba(7, 11, 20, 0.75) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 245, 212, 0.15) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 4px 30px rgba(15, 23, 42, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.glass-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(0, 245, 212, 0.45) !important;
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.25), 0 12px 40px rgba(0, 0, 0, 0.8) !important;
+}
+
+.light .glass-card:hover {
+  border-color: rgba(13, 148, 136, 0.3) !important;
+  box-shadow: 0 0 20px rgba(13, 148, 136, 0.08), 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* Cyber Terminal / Panel Styling */
+.cyber-panel {
+  background: rgba(7, 11, 20, 0.85) !important;
+  border: 1px solid rgba(0, 245, 212, 0.18) !important;
+  box-shadow: 0 0 15px rgba(0, 245, 212, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.01) !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cyber-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00F5D4, #A855F7, transparent);
+  animation: cyber-glow-sweep 4s linear infinite;
+}
+
+.light .cyber-panel {
+  background: #ffffff !important;
+  border: 1px solid rgba(13, 148, 136, 0.18) !important;
+  box-shadow: 0 0 10px rgba(13, 148, 136, 0.02) !important;
+}
+
+.light .cyber-panel::before {
+  background: linear-gradient(90deg, transparent, #0d9488, #0ea5e9, transparent);
+}
+
+.cyber-panel:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 245, 212, 0.4) !important;
+  box-shadow: 0 0 25px rgba(0, 245, 212, 0.15), 0 12px 40px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Cyber Grid Mesh Background */
+.cyber-grid {
+  background-image: 
+    linear-gradient(rgba(0, 245, 212, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 212, 0.018) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center;
+  position: relative;
+}
+
+.cyber-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 45%, #05060A 100%);
+  pointer-events: none;
+}
+
+.light .cyber-grid {
+  background-image: 
+    linear-gradient(rgba(13, 148, 136, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 148, 136, 0.03) 1px, transparent 1px);
+}
+
+.light .cyber-grid::after {
+  background: radial-gradient(circle at 50% 50%, transparent 70%, #f1f5f9 100%);
+}
+
+/* Neon Glow Utilities */
+.glow-text {
+  text-shadow: 0 0 15px rgba(0, 229, 255, 0.65);
+}
+
+.light .glow-text {
+  text-shadow: 0 0 10px rgba(13, 148, 136, 0.3);
+}
+
+.glow-text-purple {
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.65);
+}
+
+.glow-border-cyan {
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+  border-color: rgba(0, 229, 255, 0.5);
+}
+
+.glow-border-red {
+  box-shadow: 0 0 15px rgba(255, 59, 92, 0.3);
+  border-color: rgba(255, 59, 92, 0.5);
+}
+
+/* Cyber Scanning Line Overlay */
+.cyber-scan-overlay {
+  position: relative;
+}
+
+.cyber-scan-overlay::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 245, 212, 0.45), transparent);
+  left: 0;
+  top: 0;
+  animation: scanning-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes scanning-sweep {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes cyber-glow-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes matrix-fade {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.8; text-shadow: 0 0 12px currentColor; }
+  100% { opacity: 0.1; }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05060A;
+}
+
+.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0D1527;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 245, 212, 0.15);
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #121C34;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.35);
+}
+
+/* Monospace font settings for data feeds */
+.font-cyber {
+  font-family: var(--font-mono);
+}
+
+/* Holographic sweep circle */
+.radar-sweep-lines {
+  background: repeating-radial-gradient(
+    circle,
+    rgba(0, 245, 212, 0.03),
+    rgba(0, 245, 212, 0.03) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* ── Browser Autofill Override ───────────────────────────────────────────── */
+/* Removes the ugly blue/yellow autofill background that browsers inject */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #070B14 inset !important;
+  -webkit-text-fill-color: #f3f4f6 !important;
+  caret-color: #f3f4f6 !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
